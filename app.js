@@ -8,7 +8,7 @@ require('dotenv').config()
 var users = require('./apiServices/users/routes')
 var tasks = require('./apiServices/tasks/routes')
 
-var app=express();
+const app=express();
 
 const corsOptions = {
     origin: '*'
