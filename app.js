@@ -18,11 +18,16 @@ const corsOptions = {
 app.use(logger('dev'))
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
+
 app.use("/api",cors(corsOptions),users)
 app.use("/api",cors(corsOptions),tasks)
 
 app.get("/", (req,res)=>{
     res.send('funcionando')
+})
+
+app.listen(process.env.PORT||8000,()=>{
+    console.log('conectado al puerto', process.env.PORT);
 })
 
 module.exports=app;
