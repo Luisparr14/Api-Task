@@ -26,8 +26,6 @@ app.get("/", (req,res)=>{
     res.send('funcionando')
 })
 
-app.listen(process.env.PORT||8000,()=>{
-    console.log('conectado al puerto', process.env.PORT);
-})
+
 
 module.exports=app;
