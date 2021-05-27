@@ -49,7 +49,7 @@ class tasksController {
     }
 
     static deleteTask(req,res){
-        const sql="delete from tasks where username = ? and id_task=?"
+        const sql="delete from tasks where username = ? and id_tasks=?"
         const params=[req.params.username,req.params.id]
         
         db.query(sql, params,(err,task)=>{
