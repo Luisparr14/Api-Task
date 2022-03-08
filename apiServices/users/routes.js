@@ -5,10 +5,10 @@ const router=express.Router();
 const usercontroller=require('./controller')
 
 
-router.get("/user", usercontroller.users)
-router.post("/user", usercontroller.adduser)
-router.get("/user/:user", usercontroller.getUser)
-router.post("/user/:user", usercontroller.uniquser)
+router.get("/", usercontroller.users)
+router.post("/", usercontroller.adduser)
+router.get("/:user", usercontroller.getUser)
+router.post("/:user", usercontroller.uniquser)
 
 
 module.exports=router;

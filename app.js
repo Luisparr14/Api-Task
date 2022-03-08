@@ -5,8 +5,7 @@ var logger=require('morgan');
 var cors=require('cors')
 require('dotenv').config()
 
-var users = require('./apiServices/users/routes')
-var tasks = require('./apiServices/tasks/routes')
+const routes = require('./routes/index')
 
 const app=express();
 
@@ -19,8 +18,7 @@ app.use(logger('dev'))
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
-app.use("/api",cors(corsOptions),users)
-app.use("/api",cors(corsOptions),tasks)
+app.use("/api/v1", routes)
 
 app.get("/", (req,res)=>{
     res.send('funcionando')
