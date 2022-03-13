@@ -9,6 +9,6 @@ const Register = async (req, res) => {
 }
 
 module.exports = {
-    Login,
-    Register
+	Login,
+	Register
 }

@@ -2,119 +2,119 @@
 
 const db = require('../../config/database')
 var bcrypt = require('bcrypt')
-const saltRound = 10;
+const saltRound = 10
 
 class usercontroller {
 
-    static users(req, res) {
-        var sql = "select * from users"
+	static users(req, res) {
+		var sql = 'select * from users'
 
-        db.query(sql, (err, result) => {
-            res.json(result)
-        })
-    }
+		db.query(sql, (err, result) => {
+			res.json(result)
+		})
+	}
 
-    static adduser(req, res) {
-        var { userName, name, lastName, password } = req.body;
-        const sql = 'INSERT INTO users (username, name, lastname,password) values (?,?,?,?)'
+	static adduser(req, res) {
+		var { userName, name, lastName, password } = req.body
+		const sql = 'INSERT INTO users (username, name, lastname,password) values (?,?,?,?)'
 
-        bcrypt.genSalt(saltRound, (err, salt) => {
-            if (err) throw err
+		bcrypt.genSalt(saltRound, (err, salt) => {
+			if (err) throw err
 
-            bcrypt.hash(password, salt, (err, hash) => {
-                if (err) throw err
+			bcrypt.hash(password, salt, (err, hash) => {
+				if (err) throw err
 
-                password = hash
+				password = hash
 
-                const params = [userName, name, lastName, password]
+				const params = [userName, name, lastName, password]
 
-                db.query(sql, params, (err, result) => {
-                    if (err) {
-                        return res.status(500).json({ "error": err.message })
-                    }
-                    console.log('resultado', result);
-                    req.body.id = result.insertId;
-                    res.json({
-                        'user': req.body
-                    })
+				db.query(sql, params, (err, result) => {
+					if (err) {
+						return res.status(500).json({ 'error': err.message })
+					}
+					console.log('resultado', result)
+					req.body.id = result.insertId
+					res.json({
+						'user': req.body
+					})
 
-                })
-            })
-        })
+				})
+			})
+		})
 
-    }
+	}
 
-    // static adduser(req, res) {
+	// static adduser(req, res) {
 
-    //     var { userName, name, lastName, password } = req.body;
-    //     const sql = 'INSERT INTO users (username, name, lastname,password) values (?,?,?,?)'
+	//     var { userName, name, lastName, password } = req.body;
+	//     const sql = 'INSERT INTO users (username, name, lastname,password) values (?,?,?,?)'
 
-    //     bcrypt.genSalt(saltRound, (err, salt) => {
-    //         if (err) throw err
+	//     bcrypt.genSalt(saltRound, (err, salt) => {
+	//         if (err) throw err
 
-    //         bcrypt.hash(password, salt, (err, hash) => {
-    //             if (err) throw err
+	//         bcrypt.hash(password, salt, (err, hash) => {
+	//             if (err) throw err
 
-    //             password = hash
+	//             password = hash
 
-    //             const params = [userName, name, lastName, password]
+	//             const params = [userName, name, lastName, password]
 
-    //             db.query(sql, params, (err, result) => {
-    //                 if (err) {
-    //                     return res.status(500).json({ "error": err.message })
-    //                 }
-    //                 console.log('resultado', result);
-    //                 req.body.id = result.insertId;
-    //                 res.json({
-    //                     'user': req.body
-    //                 })
+	//             db.query(sql, params, (err, result) => {
+	//                 if (err) {
+	//                     return res.status(500).json({ "error": err.message })
+	//                 }
+	//                 console.log('resultado', result);
+	//                 req.body.id = result.insertId;
+	//                 res.json({
+	//                     'user': req.body
+	//                 })
 
-    //             })
-    //         })
-    //     })
+	//             })
+	//         })
+	//     })
 
-    // }
+	// }
 
-    static uniquser(req, res) {
-        let passwordV = false;
-        var { userName, password } = req.body
-        var sql = "select * from users where username = ?"
+	static uniquser(req, res) {
+		let passwordV = false
+		var { userName, password } = req.body
+		var sql = 'select * from users where username = ?'
 
-        db.query(sql, userName, (err, user) => {
-            if (err) {
-                res.status(500).json({ 'error': err.message });
-                return
-            }
-            if (user.length > 0) {
+		db.query(sql, userName, (err, user) => {
+			if (err) {
+				res.status(500).json({ 'error': err.message })
+				return
+			}
+			if (user.length > 0) {
 
-                bcrypt.compare(password, user[0].password, (err, resul) => {
-                    if (err) throw err
-                    console.log("Contraseña correcta", resul);
-                    if (resul) {
-                        passwordV = true
-                    }
-                    res.json({
-                        user,
-                        passwordV
-                    })
-                })
-            }
-        })
-    }
+				bcrypt.compare(password, user[0].password, (err, resul) => {
+					if (err) throw err
+					console.log('Contraseña correcta', resul)
+					if (resul) {
+						passwordV = true
+					}
+					res.json({
+						user,
+						passwordV
+					})
+				})
+			}
+		})
+	}
 
-    static getUser(req, res) {
+	static getUser(req, res) {
 
-        var sql = "select * from users where username = ?"
+		var sql = 'select * from users where username = ?'
 
-        db.query(sql, req.params.user, (err, user) => {
-            if (err) {
-                res.status(500).json({ 'error': err.message });
-                return
-            } 
-            res.json(user)
+		db.query(sql, req.params.user, (err, user) => {
+			if (err) {
+				res.status(500).json({ 'error': err.message })
+				return
+			} 
+			res.json(user)
 
-        })
-    }
+		})
+	}
 }
 
 module.exports = usercontroller

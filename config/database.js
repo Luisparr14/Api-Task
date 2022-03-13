@@ -4,19 +4,19 @@ const { Sequelize } = require('sequelize')
 //   host: process.env.DB_HOST,
 //   dialect: 'mysql'
 // });
-const sequelize = new Sequelize('tasks', 'lucho', 'MySQLlucho', {
-  host: 'localhost',
-  dialect: 'mysql'
+const sequelize = new Sequelize('tasks', 'root', 'MySQLlucho', {
+	host: 'localhost',
+	dialect: 'mysql'
 });
 
 (async () => {
-  try {
-    await sequelize.authenticate()
-    console.log('Connection has been established successfully.')
-  }
-  catch (error) {
-    console.error('Unable to connect to the database:', error)
-  }
-})();
+	try {
+		await sequelize.authenticate()
+		console.log('Connection has been established successfully.')
+	}
+	catch (error) {
+		console.error('Unable to connect to the database:', error)
+	}
+})()
 
 module.exports = sequelize
