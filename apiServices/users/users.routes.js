@@ -2,7 +2,7 @@ const express=require('express')
 
 const router=express.Router()
 
-const usercontroller=require('./controller')
+const usercontroller=require('./users.controller')
 
 
 router.get('/', usercontroller.users)

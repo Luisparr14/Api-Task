@@ -6,12 +6,12 @@ var logger=require('morgan')
 require('dotenv').config()
 
 const routes = require('./routes/index')
-
 const app=express()
 
 // const corsOptions = {
 // 	origin: '*'
 // }
+// config
 
 //middlewares
 app.use(logger('dev'))
@@ -21,9 +21,7 @@ app.use(bodyParser.json())
 app.use('/api/v1', routes)
 
 app.get('/', (req,res)=>{
-	res.send('funcionando')
+  res.send('funcionando')
 })
 
-
-
-module.exports=app
+module.exports = app
