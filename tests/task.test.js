@@ -1,15 +1,10 @@
 const { app, server } = require('../bin/www')
-const sequelize = require('../models/index')
 const supertest = require('supertest')
 const api = supertest(app)
-const Task = require('../models/task')
+const { Task, sequelize } = require('../models/')
 
-beforeAll(async () => {
-  try {
-    await Task.destroy({ where: {} })
-  } catch (error) {
-    console.log(error)
-  }
+beforeEach(() => {
+  Task.destroy({ where: {} })
 })
 
 describe('Tasks', () => {
@@ -18,6 +13,25 @@ describe('Tasks', () => {
       .get('/api/v1/tasks')
       .expect(200)
       .expect('Content-Type', /application\/json/)
+  })
+
+  test('Add task', async () => {
+    await api
+      .post('/api/v1/tasks')
+      .send({
+        title: 'Task test',
+        description: null,
+        completed: false,
+        userId: 2
+      })
+      .expect(201)
+      .expect('Content-Type', /application\/json/)
+
+    const res = await api
+      .get('/api/v1/tasks')
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+    expect(res.body.tasks.length).toBe(1)
   })
 })
 

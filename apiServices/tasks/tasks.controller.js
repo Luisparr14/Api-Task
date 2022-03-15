@@ -1,11 +1,14 @@
-const Task = require('../../models/task')
+const { Task } = require('../../models/')
 const tasks = async (req, res) => {
   try {
     const response = await Task.findAll()
-    return res.json(response)
+    return res.json({
+      success: true,
+      tasks: response
+    })
   } catch (error) {
     console.log(error)
-    return res.status(500).json({ 
+    return res.status(500).json({
       success: false,
       message: 'Error al obtener las tareas'
     })
@@ -17,12 +20,12 @@ const addTasks = async (req, res) => {
   try {
     await Task.create({
       title,
-      description, 
+      description,
       completed,
       userId
     })
     return res.status(201).json({
-      success:true,
+      success: true,
       message: 'Task created successfully'
     })
   } catch (error) {
@@ -35,11 +38,11 @@ const addTasks = async (req, res) => {
 }
 
 // const tasksByUser = (req, res) => {
-  
+
 // }
 
 // const deleteTask = (req, res) => {
-  
+
 // }
 
 module.exports = {

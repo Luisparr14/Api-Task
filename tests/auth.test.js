@@ -40,10 +40,8 @@ describe('Auth', () => {
       })
       .expect(201)
       .expect('Content-Type', /application\/json/)
-    expect(res.body.success).toBe(true)
-    
-    const user = await User.findOne({where: {email}})
-    
+    expect(res.body.success).toBe(true)    
+    const user = await User.findOne({where: {email}})    
     expect(user).not.toBe
     expect(user.dataValues.email).toBe(email)
   })
