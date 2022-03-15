@@ -2,13 +2,15 @@ const express=require('express')
 
 const router=express.Router()
 
-const usercontroller=require('./users.controller')
+const {
+  users
+}=require('./users.controller')
 
 
-router.get('/', usercontroller.users)
-router.post('/', usercontroller.adduser)
-router.get('/:user', usercontroller.getUser)
-router.post('/:user', usercontroller.uniquser)
+router.get('/', users)
+// router.post('/', adduser)
+// router.get('/:user', getUser)
+// router.post('/:user', uniquser)
 
 
 module.exports=router
