@@ -1,27 +1,34 @@
-const {User} = require('../../models')
+const { User } = require('../../models')
 const { compare } = require('bcrypt')
-const Login = async (req, res) => {
+const jwt = require('jsonwebtoken')
+
+const Login = async (req, res) => {  
   const { email, password } = req.body
   console.log(email, password)
   try {
     const user = await User.findOne({ where: { email } })
-    if (!user) {
-      return res.status(400).json({
-        success: false,
-        message: 'El correo no está registrado'
-      })
-    }
 
     let isValidPassword = await compare(password, user.dataValues.password)
-    if (!isValidPassword) {
+    if (!(isValidPassword && user)) {
       return res.status(403).json({
         success: false,
         message: 'Email o contraseña incorrectos'
       })
     }
+
+    const { name, userId } = user.dataValues
+
+    let token = jwt.sign({ name, userId }, process.env.SECRETWORD, {
+      expiresIn: 60 * 60 * 24 * 10
+    })
+
     return res.status(200).json({
       success: true,
       message: 'Login exitoso',
+      data:{
+        name,
+        token
+      }
     })
   } catch (error) {
     console.log(error)

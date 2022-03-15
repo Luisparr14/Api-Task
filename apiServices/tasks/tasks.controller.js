@@ -1,7 +1,8 @@
 const { Task } = require('../../models/')
 const tasks = async (req, res) => {
+  const { userId } = req.userInfo
   try {
-    const response = await Task.findAll()
+    const response = await Task.findAll({where: {userId}})
     return res.json({
       success: true,
       tasks: response
