@@ -15,6 +15,14 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
+      rightColor: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      leftColor: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
       completed: {
         type: Sequelize.BOOLEAN,
         allowNull: false

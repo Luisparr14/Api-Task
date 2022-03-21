@@ -4,7 +4,7 @@ const {
 } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class Task extends Model {
-    static associate(models) {    
+    static associate(models) {
       Task.belongsTo(models.User, {
         foreignKey: 'userId',
         onDelete: 'CASCADE',
@@ -26,6 +26,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true
     },
+    rightColor: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    leftColor: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     completed: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
@@ -33,14 +41,14 @@ module.exports = (sequelize, DataTypes) => {
     },
     userId: {
       type: DataTypes.INTEGER,
-      references:{
+      references: {
         model: 'Users',
-        key: 'userId'        
+        key: 'userId'
       }
     }
   }, {
     sequelize,
-    modelName: 'Task',    
+    modelName: 'Task',
   })
   return Task
 }

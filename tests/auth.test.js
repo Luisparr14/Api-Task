@@ -1,6 +1,7 @@
 const { app, server } = require('../bin/www')
 const { User, sequelize } = require('../models/')
 const supertest = require('supertest')
+const { createUsers } = require('../helpers/userHelper')
 const api = supertest(app)
 
 beforeEach(() => {
@@ -9,18 +10,12 @@ beforeEach(() => {
 
 describe('Auth', () => {
   test('Login de usuario', async () => {
-    await User.create({
-      name: 'Juan',
-      lastName: 'Perez',
-      email: 'luis@email.com',
-      password: 'Luis'
-    })
-
+    await createUsers()
     const res = await api
       .post('/api/v1/auth/login')
       .send({
         email: 'luis@email.com',
-        password: 'Luis'
+        password: '12345678'
       })
       .expect(200)
       .expect('Content-Type', /application\/json/)
@@ -29,6 +24,7 @@ describe('Auth', () => {
 
   test('Register', async()=>{
     let email = 'Luis@email.com'
+    
     const res = await api
       .post('/api/v1/auth/register')
       .send({

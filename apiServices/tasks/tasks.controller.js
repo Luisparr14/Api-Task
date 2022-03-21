@@ -2,10 +2,10 @@ const { Task } = require('../../models/')
 const tasks = async (req, res) => {
   const { userId } = req.userInfo
   try {
-    const response = await Task.findAll({where: {userId}})
+    const response = await Task.findAll({ where: { userId } })
     return res.json({
       success: true,
-      tasks: response
+      data: response
     })
   } catch (error) {
     console.log(error)
@@ -17,12 +17,15 @@ const tasks = async (req, res) => {
 }
 
 const addTasks = async (req, res) => {
-  const { title, description, completed, userId } = req.body
+  const { title, description, leftColor, rightColor } = req.body
+  const { userId } = req.userInfo
   try {
     await Task.create({
       title,
       description,
-      completed,
+      rightColor,
+      leftColor,
+      completed: false,
       userId
     })
     return res.status(201).json({
