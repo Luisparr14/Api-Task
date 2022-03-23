@@ -1,6 +1,6 @@
 'use strict'
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up (queryInterface, Sequelize) {
     await queryInterface.createTable('Tasks', {
       taskId: {
         allowNull: false,
@@ -32,7 +32,7 @@ module.exports = {
         allowNull: false,
         references: {
           model: 'Users',
-          key: 'userId'          
+          key: 'userId'
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
@@ -47,7 +47,7 @@ module.exports = {
       }
     })
   },
-  async down(queryInterface, Sequelize) {
+  async down (queryInterface, Sequelize) {
     await queryInterface.dropTable('Tasks')
   }
 }

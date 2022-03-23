@@ -9,10 +9,10 @@ const Login = async (req, res) => {
     const user = await User.findOne({ where: { email } })
 
     if (user) {
-      let isValidPassword = await compare(password, user.dataValues.password)
+      const isValidPassword = await compare(password, user.dataValues.password)
       if (isValidPassword) {
         const { name, userId } = user.dataValues
-        let token = jwt.sign({ name, userId }, process.env.SECRETWORD, {
+        const token = jwt.sign({ name, userId }, process.env.SECRETWORD, {
           expiresIn: 60 * 60 * 24 * 10
         })
         return res.status(200).json({
@@ -30,7 +30,6 @@ const Login = async (req, res) => {
       success: false,
       message: 'Email o contraseña incorrectos'
     })
-
   } catch (error) {
     console.log(error)
     return res.status(500).json({
@@ -42,7 +41,6 @@ const Login = async (req, res) => {
 
 const Register = async (req, res) => {
   const { name, lastName, email, password, confirmPassword } = req.body
-  console.log(req.body)
   if (password !== confirmPassword) {
     return res.status(400).json({
       message: 'Las contraseñas no coinciden'

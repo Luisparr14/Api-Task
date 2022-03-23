@@ -1,6 +1,6 @@
 'use strict'
 
-const {User} = require('../../models')
+const { User } = require('../../models')
 
 const users = async (req, res) => {
   try {

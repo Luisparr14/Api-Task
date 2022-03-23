@@ -4,7 +4,7 @@ const {
 } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class Task extends Model {
-    static associate(models) {
+    static associate (models) {
       Task.belongsTo(models.User, {
         foreignKey: 'userId',
         onDelete: 'CASCADE',
@@ -48,7 +48,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'Task',
+    modelName: 'Task'
   })
   return Task
 }

@@ -10,11 +10,10 @@ beforeEach(() => {
 })
 
 describe('Tasks', () => {
-  
   test('Get all tasks', async () => {
     await createUsers()
     await createTasks()
-    const response = await login()  
+    const response = await login()
     const { token } = response
 
     await api
@@ -26,13 +25,13 @@ describe('Tasks', () => {
 
   test('Add task', async () => {
     await createUsers()
-    
+
     const response = await login()
     const { token } = response
 
     await api
       .post('/api/v1/tasks')
-      .set({ 'Authorization': `Bearer ${token}` })
+      .set({ Authorization: `Bearer ${token}` })
       .send({
         title: 'Task test',
         description: null,
@@ -44,10 +43,10 @@ describe('Tasks', () => {
 
     const res = await api
       .get('/api/v1/tasks')
-      .set({ 'Authorization': `Bearer ${token}` })
+      .set({ Authorization: `Bearer ${token}` })
       .expect(200)
       .expect('Content-Type', /application\/json/)
-      
+
     expect(res.body.tasks.length).toBe(1)
   })
 })

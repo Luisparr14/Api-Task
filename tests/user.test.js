@@ -18,8 +18,8 @@ const initialData = [
   }
 ]
 
-beforeEach( () => {
-  User.destroy({ where: {}})
+beforeEach(() => {
+  User.destroy({ where: {} })
 })
 
 describe('Tests for user information', () => {

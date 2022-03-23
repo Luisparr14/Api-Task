@@ -22,9 +22,9 @@ describe('Auth', () => {
     expect(res.body.success).toBe(true)
   })
 
-  test('Register', async()=>{
-    let email = 'Luis@email.com'
-    
+  test('Register', async () => {
+    const email = 'Luis@email.com'
+
     const res = await api
       .post('/api/v1/auth/register')
       .send({
@@ -36,10 +36,9 @@ describe('Auth', () => {
       })
       .expect(201)
       .expect('Content-Type', /application\/json/)
-    expect(res.body.success).toBe(true)    
-    const user = await User.findOne({where: {email}})    
-    expect(user).not.toBe
-    expect(user.dataValues.email).toBe(email)
+    expect(res.body.success).toBe(true)
+    const user = await User.findOne({ where: { email } })
+    expect(user).not.toBe && expect(user.dataValues.email).toBe(email)
   })
 })
 

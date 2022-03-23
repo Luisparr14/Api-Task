@@ -5,22 +5,17 @@
   "main": "app.js",
   "scripts": {
     "start": "node bin/www",
-    "dev": "NODE_ENV=development nodemon bin/www",
-    "test": "NODE_ENV=test jest --verbose --silent --detectOpenHandles",
-    "test:nosilent": "NODE_ENV=test jest --verbose --detectOpenHandles",
-    "test:watch": "npm run test -- --watch",
+    "dev": "NODE_ENV=development nodemon bin/www",    
     "migrate:dev": "NODE_ENV=development sequelize db:migrate",
     "migrate:test": "NODE_ENV=test sequelize db:migrate",
     "rollback:dev": "NODE_ENV=development sequelize db:migrate:undo",
     "rollback:test": "NODE_ENV=test sequelize db:migrate:undo",
     "rollback:all:dev": "NODE_ENV=development sequelize db:migrate:undo:all",
-    "rollback:all:test": "NODE_ENV=test sequelize db:migrate:undo:all",
-    "lint": "eslint ."
+    "rollback:all:test": "NODE_ENV=test sequelize db:migrate:undo:all"
   },
   "author": "Luis",
   "license": "ISC",
-  "dependencies": {
-    "axios": "^0.26.1",
+  "dependencies": {    
     "bcrypt": "5.0.1",
     "body-parser": "1.19.2",
     "cors": "2.8.5",
@@ -32,8 +27,6 @@
     "sequelize": "6.17.0"
   },
   "devDependencies": {
-    "eslint": "8.11.0",
-    "jest": "27.5.1",
     "nodemon": "2.0.15",
     "sequelize-cli": "6.4.1",
     "supertest": "^6.2.2"

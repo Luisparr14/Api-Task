@@ -6,7 +6,7 @@ const {
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    static associate(models) {
+    static associate (models) {
       User.hasMany(models.Task, {
         foreignKey: 'userId'
       })
@@ -43,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING(300),
       allowNull: false,
-      set(val) {
+      set (val) {
         const salt = bcrypt.genSaltSync(10)
         const hash = bcrypt.hashSync(val, salt)
         this.setDataValue('password', hash)
@@ -51,7 +51,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'User',
+    modelName: 'User'
   })
   return User
 }
