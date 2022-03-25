@@ -46,8 +46,7 @@ describe('Tasks', () => {
       .set({ Authorization: `Bearer ${token}` })
       .expect(200)
       .expect('Content-Type', /application\/json/)
-
-    expect(res.body.tasks.length).toBe(1)
+    expect(res.body.data.length).toBe(1)
   })
 })
 

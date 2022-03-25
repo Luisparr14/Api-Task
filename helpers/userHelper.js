@@ -1,6 +1,6 @@
 const axios = require('axios')
 const { User } = require('../models')
-const baseUrl = ''
+const baseUrl = 'http://localhost:3001'
 const InitialUsers = [
   {
     userId: 1,
