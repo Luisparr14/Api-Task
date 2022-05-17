@@ -1,3 +1,4 @@
 .env
+.env.aws
 node_modules
 .vscode
